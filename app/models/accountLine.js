@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 
 const accountLineSchema = new mongoose.Schema({
-  label: { type: String, required: [true, 'Label is required'] },
+  label: {
+    type: String,
+    required: [true, 'Label is required'],
+    minlength: [3, 'Label must be at least 3 characters long'],
+    maxlength: [15, 'Label cannot exceed 15 characters'],
+
+  },
   type: { type: String, required: [true, 'Type is required'] },
   amount: { type: Number, required: [true, 'Amount is required'] },
   paymentDate: { type: Date, required: [true, 'Payment date is required'] },
