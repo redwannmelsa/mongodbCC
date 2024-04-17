@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-export const accountLineSchema = new mongoose.Schema({
+const accountLineSchema = new mongoose.Schema({
   label: { type: String, required: true },
-  type: { type: String, required: false },
+  type: { type: String, required: true },
   amount: { type: Date, required: true },
   paymentDate: { type: Date, required: true },
   paymentMethod: { type: String, required: true },
@@ -10,3 +10,5 @@ export const accountLineSchema = new mongoose.Schema({
   category: { type: ObjectId, required: true },
   accountId: { type: ObjectId, required: true }
 });
+
+export const AccountLine = mongoose.model(AccountLine, accountLineSchema)
