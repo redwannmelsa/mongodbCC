@@ -7,4 +7,7 @@ app.get('/', (req, res) => {
   res.send('hello world')
 })
 
+const router = require('./app/routes/index.js')
+app.use('/api', router)
+
 module.exports = app;
