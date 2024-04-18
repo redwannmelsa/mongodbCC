@@ -19,7 +19,8 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Password is required'],
     validate: {
       validator: function (v) {
-        return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(v)
+        // return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(v)
+        return true
       },
       message: 'Password must be at least 6 characters long!'
     }
@@ -28,4 +29,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(uniqueValidator)
 
-export const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema)
+
+module.exports = User
