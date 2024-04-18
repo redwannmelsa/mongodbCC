@@ -3,7 +3,7 @@ const User = require('../models/User')
 require('dotenv').config()
 
 async function createUser(req, res) {
-  const { username, email, password } = req.body
+  const { name, email, password } = req.body
 
   try {
     const existingUser = await User.findOne({ email })
@@ -12,7 +12,7 @@ async function createUser(req, res) {
     }
 
     const newUser = new User({
-      username,
+      name,
       email,
       password
     })
