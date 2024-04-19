@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Account = require('./account')
 
 const accountLineSchema = new mongoose.Schema({
   label: {
@@ -36,7 +37,23 @@ const accountLineSchema = new mongoose.Schema({
     required: [true, 'Account ID is required'],
     ref: "Account"
   },
-  lastUpdated: { type: Date, required: [true, 'Last updated date is required'] }
+  lastUpdated: { type: Date }
 });
 
-export const AccountLine = mongoose.model('AccountLine', accountLineSchema)
+accountLineSchema.pre('save', async function (next) {
+  this.lastUpdated = Date.now()
+  next()
+})
+
+// accountLineSchema.pre('find', async function (next) {
+//   const account = await Account.findById(req.auth.accountId).exec()
+//   if (account.userId.toString() !== req.auth.userId) {
+//     res.status(403).json({ message: 'Cannot access this account' })
+//   } else {
+//     next()
+//   }
+// })
+
+const AccountLine = mongoose.model('AccountLine', accountLineSchema)
+
+module.exports = AccountLine

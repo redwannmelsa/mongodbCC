@@ -3,10 +3,10 @@ const router = express();
 
 const userRoutes = require('./user.js')
 const bankRoutes = require('./bank.js')
-// const bankLinesRoutes = require('./bankLines.js')
+const bankLinesRoutes = require('./bankLine.js')
 
 router.use("/auth", userRoutes)
 router.use("/bank", bankRoutes)
-// router.use("/bankLines", bankLinesRoutes)
+router.use("/bankLines", bankLinesRoutes)
 
 module.exports = router
