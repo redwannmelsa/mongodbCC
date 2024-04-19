@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator')
+const bcrypt = require('bcrypt')
+const saltRounds = 10;
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: [true, 'Name is required'] },
@@ -28,6 +30,14 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.plugin(uniqueValidator)
+
+userSchema.pre('save', async function (next) {
+  try {
+    this.password = await bcrypt.hash(this.password, saltRounds)
+  } catch (error) {
+    next(error)
+  }
+})
 
 const User = mongoose.model('User', userSchema)
 

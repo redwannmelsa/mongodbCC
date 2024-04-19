@@ -1,6 +1,5 @@
 const AccountLine = require('../models/accountLine')
 const Account = require('../models/account')
-const { listenerCount } = require('../routes/bankLine')
 
 async function createLine(req, res) {
   const { accountId } = req.params
